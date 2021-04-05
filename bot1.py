@@ -17,7 +17,7 @@ def ChangeName(new, time):
     print()
     vk_session.method('messages.editChat', {'chat_id': chat_id, 'title': new})
 
-TOKEN = '2f9bed4b86ce231a947db1e49d86c9d77e190267002ced40d01cf9db5345997fe9eb5350b163ad3490982'
+TOKEN = ''
 vk_session = vk_api.VkApi(token = TOKEN)
 
 #my_groups = vk_session.method('messages.getConversations', {'group_id' : 202243542})
