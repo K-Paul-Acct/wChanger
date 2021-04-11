@@ -27,7 +27,9 @@ vk_session = vk_api.VkApi(token = TOKEN)
 shift_parity = 1
 now = datetime.datetime.now() + datetime.timedelta(hours=3)
 last_change = datetime.datetime.weekday(now) == 0
-chat_id = 2
+if datetime.datetime.weekday(now) == 6:
+    last_change = 1
+chat_id = 1
 #print(last_change)
 
 while True:
