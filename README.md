@@ -6,8 +6,8 @@ wChanger
 ### Run by Max:
 
 ```bash
-sudo chmod a+x build.sh ; \
-./build.sh
+sudo chmod a+x run.sh ; \
+./run.sh
 ```
 
 Enter path to interpreter Python. If your path to interpreter is `/usr/bin/python3`, click Enter. Else write your `/path/to/python` and click Enter
