@@ -1,3 +1,3 @@
 TOKEN = ''
 shift_parity = 0
-chat_id = 1
+chat_id = 2
