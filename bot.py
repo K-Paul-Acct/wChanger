@@ -7,7 +7,6 @@ from config import TOKEN, shift_parity, chat_id
 
 
 vk_session = vk_api.VkApi(token=TOKEN)
-change_name(shift_parity, chat_id)
 
 
 def is_week_odd(shift_parity: int, now: datetime) -> bool:
@@ -34,3 +33,6 @@ def change_name(shift_parity: int, chat_id: int) -> None:
     s = sched.scheduler(time.time, time.sleep)
     s.enterabs(time.mktime(next_changing_time.timetuple()), 0, change_name, argument=(shift_parity, chat_id,))
     s.run()
+
+    
+change_name(shift_parity, chat_id)
