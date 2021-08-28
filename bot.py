@@ -9,7 +9,7 @@ from config import TOKEN, shift_parity, chat_id
 vk_session = vk_api.VkApi(token=TOKEN)
 
 
-def is_week_odd(shift_parity: int, now: datetime) -> bool:
+def is_week_odd(shift_parity: int, now) -> bool:
     return (int(now.strftime('%W')) + shift_parity) % 2
 
 
