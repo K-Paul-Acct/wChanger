@@ -5,6 +5,7 @@ import vk_api
 from datetime import datetime, timedelta
 from config import TOKEN, shift_parity, chat_id
 
+
 vk_session = vk_api.VkApi(token=TOKEN)
 
 
