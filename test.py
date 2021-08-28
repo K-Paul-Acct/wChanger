@@ -17,12 +17,12 @@ def change_name(chat_id: int) -> None:
     name = 'Группа 4232, '
     now = datetime.now()
 
-    if now.weekday() == 1 and now.hour == 0:
-        name += 'Нечёт' if change_name else 'Чёт'
+    if now.weekday() == 0 and now.hour == 0:
+        name += 'Нечёт' if odd_week else 'Чёт'
         vk_session.method('messages.editChat', {'chat_id': chat_id, 'title': name})
 
     elif now.weekday() == 5 and now.hour == 18:
-        name += 'Чёт. След.' if change_name else 'Нечёт. След.'
+        name += 'Чёт. След.' if odd_week else 'Нечёт. След.'
         vk_session.method('messages.editChat', {'chat_id': chat_id, 'title': name})
 
 
