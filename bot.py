@@ -16,6 +16,7 @@ def is_week_odd(shift_parity: int, now) -> bool:
 def change_name(shift_parity: int, chat_id: int) -> None:
     name = 'Группа 4232, '
     now = datetime.datetime.now() + datetime.timedelta(hours=3)
+    global week_number
 
     if (now.weekday() < 5) or (now.weekday() == 5 and now.hour < 18):
         name += 'Нечёт, ' if is_week_odd(shift_parity, now) else 'Чёт, '
