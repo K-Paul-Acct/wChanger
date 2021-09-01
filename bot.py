@@ -18,21 +18,24 @@ def change_name(shift_parity: int, chat_id: int) -> None:
     now = datetime.datetime.now() + datetime.timedelta(hours=3)
 
     if (now.weekday() < 5) or (now.weekday() == 5 and now.hour < 18):
-        name += 'Нечёт.' if is_week_odd(shift_parity, now) else 'Чёт.'
+        name += 'Нечёт, ' if is_week_odd(shift_parity, now) else 'Чёт, '
         next_sat = now + datetime.timedelta(days=5 - now.weekday())
         next_changing_time = datetime.datetime(next_sat.year, next_sat.month, next_sat.day, 18)
     else:
-        name += 'Чёт. След.' if is_week_odd(shift_parity, now) else 'Нечёт. След.'
+        name += 'Чёт. След, ' if is_week_odd(shift_parity, now) else 'Нечёт. След, '
+        week_number += 1
         next_mon = now + datetime.timedelta(days=7 - now.weekday())
         next_changing_time = datetime.datetime(next_mon.year, next_mon.month, next_mon.day)
 
     next_changing_time -= datetime.timedelta(hours=3)
-
+    
+    name += 'Неделя ' + str(week_number)
     vk_session.method('messages.editChat', {'chat_id': chat_id, 'title': name})
 
     s = sched.scheduler(time.time, time.sleep)
     s.enterabs(time.mktime(next_changing_time.timetuple()), 0, change_name, argument=(shift_parity, chat_id,))
     s.run()
 
-    
+
+week_number = 1
 change_name(shift_parity, chat_id)
