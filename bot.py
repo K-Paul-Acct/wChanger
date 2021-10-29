@@ -1,4 +1,3 @@
-import sys
 import time
 import sched
 import vk_api
@@ -20,6 +19,8 @@ vk_session = vk_api.VkApi(token=TOKEN)
 longpoll = VkBotLongPoll(vk_session, 202243542, wait=25)
 vk = vk_session.get_api()
 
+def current_week() -> str:
+    return " Сейчас нечётная неделя." if is_week_odd() else " Сейчас чётная неделя."
 
 def is_week_odd() -> bool:
     now = datetime.datetime.now() + datetime.timedelta(hours=3)
@@ -61,10 +62,10 @@ def listening() -> None:
         if event.type == VkBotEventType.MESSAGE_NEW:
             # приветственное сообщение при добавлении в беседу
             if event.from_chat and 'action' in event.message.keys() and event.message['action']['type'] == 'chat_invite_user':
-                vk.messages.send(key=KEY, server=SERVER, ts=TS, random_id=get_random_id(), chat_id=event.chat_id, message=messages.greeting)
+                vk.messages.send(key=KEY, server=SERVER, ts=TS, random_id=get_random_id(), chat_id=event.chat_id, message=messages.greeting + current_week())
             # сообщение о настройке
             elif event.from_chat and ('@wchanger] настройка' in str(event) or '@wchanger], настройка' in str(event)):
-                vk.messages.send(key=KEY, server=SERVER, ts=TS, random_id=get_random_id(), chat_id=event.chat_id, message=messages.setting)
+                vk.messages.send(key=KEY, server=SERVER, ts=TS, random_id=get_random_id(), chat_id=event.chat_id, message=messages.setting + current_week())
             # настройка
             elif event.from_chat and '@wchanger]' in str(event):
                 json_object = json.loads(json.dumps(event.object.message))
@@ -103,7 +104,7 @@ def listening() -> None:
                 # если сообщение некорректное
                 else:
                     vk.messages.send(key=KEY, server = SERVER, ts = TS, random_id = get_random_id(), chat_id = event.chat_id, message=messages.error)
-                    vk.messages.send(key=KEY, server=SERVER, ts=TS, random_id=get_random_id(), chat_id=event.chat_id, message=messages.setting)
+                    vk.messages.send(key=KEY, server=SERVER, ts=TS, random_id=get_random_id(), chat_id=event.chat_id, message=messages.setting + current_week())
             #print(event)
 
 
