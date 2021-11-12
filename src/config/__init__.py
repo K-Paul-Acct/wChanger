@@ -7,3 +7,5 @@ if os.getenv("LEVEL") == "PRODUCTION":
 else:
     print('RUN LOCAL MODE')
     from .local import *
+
+from .base import *
