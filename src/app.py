@@ -5,10 +5,10 @@ from datetime import datetime, timedelta
 
 from time import time, sleep, mktime
 
-from .bot import Bot, vk_session
-from .messages import *
-from .config import *
-from . import db
+from bot import Bot, vk_session
+from messages import *
+from config import *
+import db
 
 import threading
 import sqlite3

@@ -1,4 +1,4 @@
-from .config import TOKEN, TS, KEY, SERVER
+from config import TOKEN, TS, KEY, SERVER
 
 from vk_api.utils import get_random_id
 
