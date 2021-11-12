@@ -36,9 +36,12 @@ def is_week_odd() -> bool:
 def change_name():
     now = datetime.now()
 
+    connection = sqlite3.connect(os.path.join(BASE_DIR, 'db.sqlite3'))
+    cursor = connection.cursor()
     data = db.select_odd_week(cursor) \
         if is_week_odd() else \
             db.select_even_week(cursor)
+    connection.close()
 
     for cur_id in data:
         try:
