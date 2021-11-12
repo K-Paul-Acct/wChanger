@@ -1,19 +1,18 @@
-import vk_api
-
 from datetime import datetime
-from config import TOKEN, chat_id
+
+from config import TOKEN
+
+import vk_api
 
 
 vk_session = vk_api.VkApi(token=TOKEN)
-
+chat_id = int
 
 def odd_week() -> bool:
     now = datetime.now()
-    type = int(now.strftime('%W')) % 2
-    return type
+    return int(now.strftime('%W')) % 2
 
-
-def change_name(chat_id: int) -> None:
+def change_name(chat_id: int):
     name = 'Группа 4232, '
     now = datetime.now()
 
@@ -26,4 +25,5 @@ def change_name(chat_id: int) -> None:
         vk_session.method('messages.editChat', {'chat_id': chat_id, 'title': name})
 
 
-change_name(chat_id)
+if __name__ == '__main__':
+    change_name(chat_id)

@@ -18,7 +18,7 @@ import os
 
 
 bot = Bot
-longpoll = VkBotLongPoll(vk_session, ID, wait=25)
+longpoll = VkBotLongPoll(vk_session, ID)
 vk = vk_session.get_api()
 
 connection = sqlite3.connect(os.path.join(BASE_DIR, 'db.sqlite3'))
