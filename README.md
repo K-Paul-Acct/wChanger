@@ -1,7 +1,6 @@
-wChanger
-========
+# wChanger
 
-*Bot for changing name of vk_chat relative to week*
+*Bot for changing title of VK Conversations relative to the current week parity*
 
 ### Install environment and packages:
 
@@ -9,7 +8,7 @@ wChanger
 ./deployment/scripts/install.sh
 ```
 
-Enter path to interpreter Python. If your path to interpreter is `/usr/bin/python`, click Enter. Else write your `/path/to/python` and click Enter
+Enter path to a python interpreter. If your path to the interpreter is `/usr/bin/python`, click Enter. Else type your `/path/to/python` and confirm.
 
 ```
 ┌────────────────────┐
