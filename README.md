@@ -1,22 +1,20 @@
-wChanger
---------
+# wChanger
 
-*Bot for changing name of vk_chat relative to week*
+*Bot for changing title of VK Conversations relative to the current week parity*
 
-### Run by Max:
+### Install environment and packages:
 
 ```bash
-sudo chmod a+x run.sh ; \
-./run.sh
+./deployment/scripts/install.sh
 ```
 
-Enter path to interpreter Python. If your path to interpreter is `/usr/bin/python3`, click Enter. Else write your `/path/to/python` and click Enter
+Enter path to a python interpreter. If your path to the interpreter is `/usr/bin/python`, click Enter. Else type your `/path/to/python` and confirm.
 
 ```
 ┌────────────────────┐
 | Python interpreter |
 └────────────────────┘
-Default: /usr/bin/python3
+Default: /usr/bin/python
 (Сlick Enter for choose default)
 If you wont to change, write: /path/to/python
 ```
