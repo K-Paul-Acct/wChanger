@@ -38,20 +38,20 @@ def change_name():
 
     connection = sqlite3.connect(os.path.join(BASE_DIR, 'db.sqlite3'))
     cursor = connection.cursor()
-    data = db.select_odd_week(cursor) \
+    chats = db.select_odd_week(cursor) \
         if is_week_odd() else \
             db.select_even_week(cursor)
     connection.close()
 
-    for cur_id in data:
+    for chat in chats:
         try:
-            conversations = bot.get_conversations_by_id(cur_id[0])
-            if conversations is not dict() and \
-                conversations[0]['chat_settings']['title'] != cur_id[1]:
-                    vk.messages.editChat(chat_id=cur_id[0], title=cur_id[1])
+            conversations = bot.get_conversations_by_id(chat[0])
+            if conversations != []:
+                if conversations[0]['chat_settings']['title'] != chat[1]:
+                    vk.messages.editChat(chat_id=chat[0], title=chat[1])
         except ApiError as e:
             if '925' in str(e):
-                bot.send_message(cur_id[0], bot_is_not_admin)
+                bot.send_message(chat[0], bot_is_not_admin)
 
     next_mon = now + timedelta(days=7-now.weekday())
     next_changing_time = datetime(next_mon.year, next_mon.month, next_mon.day)
@@ -65,25 +65,24 @@ def message_handler():
     for event in longpoll.listen():
         chat_id = event.chat_id
 
-        if event.type == VkBotEventType.MESSAGE_NEW:
+        if event.type == VkBotEventType.MESSAGE_NEW and event.from_chat:
 
-            if event.from_chat and 'action' in event.message.keys() \
-                and event.message['action']['type'] == 'chat_invite_user':
+            if 'action' in event.message.keys() \
+                and event.message['action']['member_id'] == int(f'-{ID}'):
 
                 '''приветственное сообщение при добавлении в беседу'''
                 bot.send_message(chat_id, greeting + cur_week())
 
-            elif event.from_chat and \
-                ('@wchanger] настройка' in str(event) or \
+            elif ('@wchanger] настройка' in str(event) or \
                     '@wchanger], настройка' in str(event)):
 
                 '''сообщение о настройке'''
                 bot.send_message(chat_id, setting + cur_week())
 
-            elif event.from_chat and '@wchanger]' in str(event):
+            elif '@wchanger]' in str(event):
                 '''настройка'''
 
-                json_object = json.loads(json.dumps(event.object.message))
+                json_object = json.loads(json.dumps(event.message))
                 message = json_object['text']
                 names = message.split("|")
 
