@@ -68,7 +68,7 @@ def message_handler():
         if event.type == VkBotEventType.MESSAGE_NEW and event.from_chat:
 
             if 'action' in event.message.keys() \
-                and event.message['action']['member_id'] == int(f'-{ID}'):
+                and event.message['action']['member_id'] == -ID:
 
                 '''приветственное сообщение при добавлении в беседу'''
                 bot.send_message(chat_id, greeting + cur_week())
